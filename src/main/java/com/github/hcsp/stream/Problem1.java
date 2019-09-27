@@ -17,12 +17,30 @@ public class Problem1 {
 
     // 编写一个方法，统计"年龄大于等于60的用户中，名字是两个字的用户数量"
     public static int countUsers(List<User> users) {
-        return 0;
+        int count=0;
+        for(User user:users){
+            if(user.age>=60&&user.name.length==2){
+                count++;
+            }
+        }
+        return count;
     }
 
     // 编写一个方法，筛选出年龄大于等于60的用户，然后将他们按照年龄从大到小排序，将他们的名字放在一个LinkedList中返回
     public static LinkedList<String> collectNames(List<User> users) {
-        return null;
+        User temp ;
+	    	LinkedList<String> names = new LinkedList();
+			for(int i=0;i<users.size();i++) {
+				for(int j=i;j<users.size()-1;j++) {
+					if (users.get(i).age<users.get(j+1).age) {
+						temp=users.get(i);
+						users.set(i, users.get(j+1));
+						users.set(j+1, temp);
+					}
+				}
+				names.add(users.get(i).name);
+			}
+	        return names;
     }
 
     public static void main(String[] args) {
